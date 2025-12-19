@@ -4,9 +4,9 @@ import "errors"
 
 // Image loading errors
 var (
-	ErrLoadGameImage    = errors.New("failed to load game background image")
-	ErrInvalidGameImage = errors.New("invalid game image")
-	ErrConvertImage     = errors.New("failed to convert game image")
+	ErrLoadImage    = errors.New("failed to load image")
+	ErrInvalidImage = errors.New("invalid image")
+	ErrConvertImage = errors.New("failed to convert image")
 )
 
 // Image drawing erros

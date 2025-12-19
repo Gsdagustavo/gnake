@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"gnake/internal/core"
 	"gnake/internal/game"
 
@@ -14,7 +15,7 @@ const (
 func main() {
 	g, err := game.NewGame()
 	if err != nil {
-		panic(err)
+		panic(errors.Join(errors.New("failed to create game"), err))
 	}
 
 	ebiten.SetWindowSize(core.WindowWidth, core.WindowHeight)
@@ -22,6 +23,6 @@ func main() {
 
 	err = ebiten.RunGame(g)
 	if err != nil {
-		panic(err)
+		panic(errors.Join(errors.New("failed to run game"), err))
 	}
 }

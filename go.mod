@@ -2,7 +2,10 @@ module gnake
 
 go 1.25
 
-require github.com/hajimehoshi/ebiten v1.12.13
+require (
+	github.com/hajimehoshi/ebiten v1.12.13
+	github.com/pkg/errors v0.9.1
+)
 
 require (
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20200707082815-5321531c36a2 // indirect

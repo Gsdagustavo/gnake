@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"gnake/internal/graphics"
 	"gnake/internal/math"
 
 	"github.com/hajimehoshi/ebiten"
@@ -13,8 +12,11 @@ type Entity struct {
 	Size          math.Vector
 	Speed         math.Vector
 	MovementSpeed float64
-	Color         graphics.Color
 	Sprite        *ebiten.Image
+}
+
+func NewEntity(position math.Vector, size math.Vector, movementSpeed float64, sprite *ebiten.Image) Entity {
+	return Entity{position, size, math.NewZeroVector(), movementSpeed, sprite}
 }
 
 func (e *Entity) Move(direction math.Vector) {
