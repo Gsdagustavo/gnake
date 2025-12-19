@@ -22,9 +22,8 @@ func (v *Vector) Add(other Vector) {
 }
 
 // Sub subrtracts the other vector from the current one
-func (v *Vector) Sub(other Vector) {
-	v.X -= other.X
-	v.Y -= other.Y
+func (v *Vector) Sub(other Vector) Vector {
+	return NewVector(v.X-other.X, v.Y-other.Y)
 }
 
 // Scale multiplies the vector factors by a factor

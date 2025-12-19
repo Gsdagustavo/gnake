@@ -3,7 +3,6 @@ package game
 import (
 	"errors"
 	"gnake/internal/entity"
-	"math/rand"
 
 	"github.com/hajimehoshi/ebiten"
 )
@@ -17,7 +16,7 @@ const (
 
 type Game struct {
 	Player         entity.Player
-	Enemies        []entity.Enemy
+	Enemies        []*entity.Enemy
 	GameBackground ebiten.Image
 	SpawnTimer     float64
 }
@@ -31,34 +30,26 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		enemy.MoveTowardsPlayer(g.Player)
 	}
 
-	// Accumulate time for en enemy spawner
-	g.SpawnTimer += 1.0 / ebiten.CurrentTPS()
-
-	if g.SpawnTimer >= 1.0 {
-		g.SpawnTimer = 0
-
-		if rand.Float64() < ChangeToSpawnEnemiesEverySecond {
-			quantEnemies := len(g.Enemies)
-			if quantEnemies < MaximumEnemiesOnScreen {
-				enemies := GenerateEnemies(MaximumEnemiesOnScreen - quantEnemies)
-				g.Enemies = append(g.Enemies, enemies...)
-			}
-		}
-	}
+	//// Accumulate time for en enemy spawner
+	//g.SpawnTimer += 1.0 / ebiten.CurrentTPS()
+	//
+	//if g.SpawnTimer >= 1.0 {
+	//	g.SpawnTimer = 0
+	//
+	//	if rand.Float64() < ChangeToSpawnEnemiesEverySecond {
+	//		quantEnemies := len(g.Enemies)
+	//		if quantEnemies < MaximumEnemiesOnScreen {
+	//			enemies := GenerateEnemies(MaximumEnemiesOnScreen - quantEnemies)
+	//			g.Enemies = append(g.Enemies, enemies...)
+	//		}
+	//	}
+	//}
 
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	// Draw player sprite
-	plr := g.Player
-	plrPos := plr.Entity.Position
 	opts := &ebiten.DrawImageOptions{}
-	opts.GeoM.Translate(plrPos.X, plrPos.Y)
-	err := screen.DrawImage(plr.Entity.Sprite, opts)
-	if err != nil {
-		panic(errors.Join(errors.New("failed to draw player image"), err))
-	}
 
 	// Draw enemies sprites
 	for _, enemy := range g.Enemies {
@@ -66,10 +57,21 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 		e := enemy.Entity
 		opts.GeoM.Translate(e.Position.X, e.Position.Y)
-		err = screen.DrawImage(e.Sprite, opts)
+		err := screen.DrawImage(e.Sprite, opts)
 		if err != nil {
 			panic(errors.Join(errors.New("failed to draw enemy image"), err))
 		}
+	}
+
+	opts = &ebiten.DrawImageOptions{}
+
+	// Draw player sprite
+	plr := g.Player
+	plrPos := plr.Entity.Position
+	opts.GeoM.Translate(plrPos.X, plrPos.Y)
+	err := screen.DrawImage(plr.Entity.Sprite, opts)
+	if err != nil {
+		panic(errors.Join(errors.New("failed to draw player image"), err))
 	}
 }
 
@@ -87,8 +89,11 @@ func NewGame() (*Game, error) {
 		return nil, errors.Join(errors.New("invalid player instance"), err)
 	}
 
+	enemies := GenerateEnemies(1000)
+
 	game := &Game{
-		Player: *plr,
+		Player:  *plr,
+		Enemies: enemies,
 	}
 
 	return game, nil

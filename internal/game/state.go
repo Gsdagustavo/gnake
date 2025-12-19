@@ -12,14 +12,14 @@ const (
 	DefaultEnemyWidth  = 20
 	DefaultEnemyHeight = 20
 
-	DefaultEnemyMoveSpeed = 5
+	DefaultEnemyMoveSpeed = 3
 
 	DefaultEnemyHealth = 100
 	DefaultEnemyDamage = 1
 )
 
-func GenerateEnemies(quantity int) []entity.Enemy {
-	enemies := make([]entity.Enemy, 0)
+func GenerateEnemies(quantity int) []*entity.Enemy {
+	enemies := make([]*entity.Enemy, 0)
 
 	for range quantity {
 		x := rand.Intn(core.WindowWidth + DefaultEnemyWidth)
@@ -40,7 +40,7 @@ func GenerateEnemies(quantity int) []entity.Enemy {
 		e := entity.NewEntity(initialPosition, initialSize, DefaultEnemyMoveSpeed, img)
 
 		enemy := entity.NewEnemy(e, DefaultEnemyHealth, DefaultEnemyDamage)
-		enemies = append(enemies, enemy)
+		enemies = append(enemies, &enemy)
 	}
 
 	return enemies

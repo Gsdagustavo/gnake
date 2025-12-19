@@ -7,7 +7,9 @@ type Enemy struct {
 }
 
 func (e *Enemy) MoveTowardsPlayer(plr Player) {
-	e.Entity.Move(plr.Entity.Position)
+	sub := plr.Entity.Position.Sub(e.Entity.Position)
+	direction := sub.Normalized()
+	e.Entity.Move(direction)
 }
 
 func NewEnemy(entity Entity, health, damage int) Enemy {
