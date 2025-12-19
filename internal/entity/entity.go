@@ -7,28 +7,16 @@ import (
 
 // Entity represents an object in the game, with a position, size, speed and color
 type Entity struct {
-	Position math.Vector
-	Size     math.Vector
-	Speed    math.Vector
-	Color    graphics.Color
+	Position      math.Vector
+	Size          math.Vector
+	Speed         math.Vector
+	MovementSpeed float64
+	Color         graphics.Color
 }
 
-// Movable represents an object that can move
-type Movable interface {
-	// Move moves the entity
-	Move()
-}
-
-// Collidable represents an object that can collide with other objects
-type Collidable interface {
-	// Collides returns true if the entity collides with the other object
-	Collides(other Collidable) bool
-}
-
-// Drawable represents an object that can be drawn
-type Drawable interface {
-	// Draw draws the entity
-	Draw()
+func (e *Entity) Move(direction math.Vector) {
+	direction.Scale(e.MovementSpeed)
+	e.Position.Add(direction)
 }
 
 // CheckCollision checks if two entities collide

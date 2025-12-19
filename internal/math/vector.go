@@ -11,6 +11,10 @@ func NewVector(x, y float64) Vector {
 	return Vector{x, y}
 }
 
+func NewZeroVector() Vector {
+	return Vector{0, 0}
+}
+
 // Add adds the other vector to the current one
 func (v *Vector) Add(other Vector) {
 	v.X += other.X
@@ -37,9 +41,13 @@ func (v *Vector) Normalize() {
 }
 
 // Normalized returns a new vector with the normalized factors
-func (v *Vector) Normalized() *Vector {
+func (v *Vector) Normalized() Vector {
+	if v.X == 0 && v.Y == 0 {
+		return *v
+	}
+
 	magnitude := math.Sqrt(v.X*v.X + v.Y*v.Y)
 	x := v.X / magnitude
 	y := v.Y / magnitude
-	return &Vector{x, y}
+	return Vector{x, y}
 }
