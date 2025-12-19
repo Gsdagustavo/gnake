@@ -1,21 +1,15 @@
-package entities
+package game
 
 import (
+	"gnake/internal/core"
+	"gnake/internal/entity"
+
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/ebitenutil"
 )
 
-const (
-	WindowWidth  = 800
-	WindowHeight = 600
-)
-
-const (
-	TargetFPS = 60
-)
-
 type Game struct {
-	Player *Player
+	Player *entity.Player
 }
 
 func (g *Game) Update(screen *ebiten.Image) error {
@@ -31,11 +25,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return 800, 600
+	return core.WindowWidth, core.WindowHeight
 }
 
 func NewGame() *Game {
 	return &Game{
-		Player: NewPlayer(),
+		Player: entity.NewPlayer(),
 	}
 }

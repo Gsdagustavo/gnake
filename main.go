@@ -1,7 +1,8 @@
 package main
 
 import (
-	"gnake/entities"
+	"gnake/internal/core"
+	"gnake/internal/game"
 
 	"github.com/hajimehoshi/ebiten"
 )
@@ -11,11 +12,11 @@ const (
 )
 
 func main() {
-	game := entities.NewGame()
-	ebiten.SetWindowSize(entities.WindowWidth, entities.WindowHeight)
+	g := game.NewGame()
+	ebiten.SetWindowSize(core.WindowWidth, core.WindowHeight)
 	ebiten.SetWindowTitle(WindowTitle)
 
-	err := ebiten.RunGame(game)
+	err := ebiten.RunGame(g)
 	if err != nil {
 		panic(err)
 	}
