@@ -3,6 +3,8 @@ package entity
 import (
 	"gnake/internal/graphics"
 	"gnake/internal/math"
+
+	"github.com/hajimehoshi/ebiten"
 )
 
 // Entity represents an object in the game, with a position, size, speed and color
@@ -12,11 +14,18 @@ type Entity struct {
 	Speed         math.Vector
 	MovementSpeed float64
 	Color         graphics.Color
+	Sprite        *ebiten.Image
 }
 
 func (e *Entity) Move(direction math.Vector) {
 	direction.Scale(e.MovementSpeed)
 	e.Position.Add(direction)
+}
+
+func (e *Entity) GetCenter() math.Vector {
+	centerX := e.Position.X + e.Size.X/2
+	centerY := e.Position.Y + e.Size.Y/2
+	return math.NewVector(centerX, centerY)
 }
 
 // CheckCollision checks if two entities collide

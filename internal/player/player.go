@@ -10,7 +10,7 @@ import (
 const (
 	DefaultPlayerWidth         = 20
 	DefaultPlayerHeight        = 20
-	DefaultPlayerMovementSpeed = 10
+	DefaultPlayerMovementSpeed = 8
 )
 
 var (
