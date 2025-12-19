@@ -9,7 +9,7 @@ import (
 )
 
 type Game struct {
-	Player *entity.Player
+	Player entity.Player
 }
 
 func (g *Game) Update(screen *ebiten.Image) error {
@@ -21,7 +21,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	plrPos := g.Player.Entity.Position
 	plrSize := g.Player.Entity.Size
 	plrColor := g.Player.Entity.Color
-	ebitenutil.DrawRect(screen, plrPos.X, plrPos.Y, plrSize.X, plrSize.Y, *plrColor)
+	ebitenutil.DrawRect(screen, plrPos.X, plrPos.Y, plrSize.X, plrSize.Y, plrColor)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {

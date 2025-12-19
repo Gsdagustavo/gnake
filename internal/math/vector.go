@@ -1,4 +1,4 @@
-package entity
+package math
 
 import "math"
 
@@ -7,8 +7,8 @@ type Vector struct {
 	X, Y float64
 }
 
-func NewVector(x, y float64) *Vector {
-	return &Vector{x, y}
+func NewVector(x, y float64) Vector {
+	return Vector{x, y}
 }
 
 // Add adds the other vector to the current one

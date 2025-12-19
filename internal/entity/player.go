@@ -2,7 +2,13 @@ package entity
 
 import (
 	"gnake/internal/core"
-	"image/color"
+	"gnake/internal/graphics"
+	"gnake/internal/math"
+)
+
+const (
+	DefaultPlayerWidth  = 20
+	DefaultPlayerHeight = 20
 )
 
 type Player struct {
@@ -10,16 +16,16 @@ type Player struct {
 	Score  int
 }
 
-func NewPlayer() *Player {
-	return &Player{
+func NewPlayer() Player {
+	return Player{
 		Entity: Entity{
-			Position: NewVector(core.WindowWidth/2, core.WindowHeight/2),
-			Size:     NewVector(20, 20),
-			Color:    &color.RGBA{R: 255, A: 255},
+			Position: math.NewVector(core.WindowWidth/2, core.WindowHeight/2),
+			Size:     math.NewVector(DefaultPlayerWidth, DefaultPlayerHeight),
+			Color:    graphics.Blue,
 		},
 	}
 }
 
-func (p *Player) Move(direction Vector) {
+func (p *Player) Move(direction math.Vector) {
 	p.Entity.Position.Add(direction)
 }

@@ -1,14 +1,16 @@
 package entity
 
-import "image/color"
+import (
+	"gnake/internal/graphics"
+	"gnake/internal/math"
+)
 
-// Entity represents an object in the game, with a position, size and speed
+// Entity represents an object in the game, with a position, size, speed and color
 type Entity struct {
-	// Position, Size and Speed are in pixels
-	Position *Vector
-	Size     *Vector
-	Speed    *Vector
-	Color    *color.RGBA
+	Position math.Vector
+	Size     math.Vector
+	Speed    math.Vector
+	Color    graphics.Color
 }
 
 // Movable represents an object that can move
